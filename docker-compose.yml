@@ -1,0 +1,26 @@
+version: '3.4'
+services:
+
+  dss:
+    build: .
+    ports:
+      - 8101:8101
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    command: [--auth]
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data/db
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
+      - DB_USER=${DB_USER}
+      - DB_PWD=${DB_PWD}
+volumes:
+  data:

@@ -3,6 +3,7 @@ const CSocClient = require('./lib/classes/CSocClient')
 const mongoose = require('mongoose');
 const {Goods} = require('./models/goods')
 const dtsServer = new CSocClient(process.env.DTS_URL, 'DTS-Server')
+
 mongoose.connect('mongodb://mongodb/goods', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
